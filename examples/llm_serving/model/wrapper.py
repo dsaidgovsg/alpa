@@ -196,7 +196,7 @@ def get_hf_model(model_name, device):
 
     model = model_class.from_pretrained(
         model_name,
-        torch_dtype=torch.float16 if "cuda" in device else torch.float32)
+        torch_dtype=torch.float16 if "cuda" in device else torch.float32, cache_dir="/efs/bloomz-cache")
     model = model.to(device)
     restore_torch_init()
 
@@ -615,7 +615,7 @@ def download_weights(model_name, path):
 
     disable_torch_init()
     model = model_class.from_pretrained(hf_model_name, torch_dtype=torch.float16,
-                                        _fast_init=True)
+                                        _fast_init=True, cache_dir="/efs/bloomz-cache")
     restore_torch_init()
 
     os.makedirs(path, exist_ok=True)
