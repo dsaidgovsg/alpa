@@ -185,11 +185,11 @@ if __name__ == "__main__":
             # The 30B version works for all OPT models.
             tokenizer = AutoTokenizer.from_pretrained("facebook/opt-30b",
                                                   use_fast=False)
+            tokenizer.add_bos_token = False
         elif "bloom" in args.model:
             name = args.model.replace("alpa", "bigscience")\
                             .replace("jax", "bigscience")
             tokenizer = AutoTokenizer.from_pretrained(name)
-        tokenizer.add_bos_token = False
 
         tic = time.time()
         model = get_model(args.model,
