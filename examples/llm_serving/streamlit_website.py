@@ -30,8 +30,9 @@ def page_config():
     if "prompt" not in st.session_state:
         st.session_state["prompt"] = prompt_examples["Fact"]
 
-    # TODO: fix spacing
-    for k, col in zip(prompt_examples, st.columns([.07, .1, .14, .13, .16, .08, .9])):
+    # best effort spacing guesses since underlying implementation is a flexbox
+    # ref: https://discuss.streamlit.io/t/regarding-layout-of-streamlit-web-app/9602/5
+    for k, col in zip(prompt_examples, st.columns([.07, .09, .12, .11, .13, .07, .9])):
         if col.button(k):
             st.session_state["prompt"] = prompt_examples[k]
 
